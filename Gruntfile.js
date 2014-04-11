@@ -7,7 +7,6 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 9001,
-          keepalive: true,
           base: 'build'
         }
       }
@@ -16,57 +15,40 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/*'],
-        tasks: ['clean', 'copy', 'replace'],
-        options: {
-          spawn: false,
-        },
+        tasks: ['clean', 'copy', 'replace']
       },
     },
+
 
     replace: {
       dist: {
         options: {
           patterns: [
             {
-              match: /foo/g,
-              replacement: 'bar'
+              match: 'launchImage',
+              replacement: '<%= config.launchImage %>'
+            },
+            {
+              match: 'iframeURL',
+              replacement: '<%= config.iframeURL %>'
+            },
+            {
+              match: 'iframeURL',
+              replacement: '<%= config.iframeURL %>'
             }
           ]
         },
         files: [
-          {expand: true, flatten: true, src: ['./src/boot.js'], dest: 'build/'}
+          {expand: true, flatten: true, src: ['src/boot.js'], dest: 'build/'}
         ]
       }
     },
-
-    // replace: {
-    //   dist: {
-    //     options: {
-    //       patterns: [
-    //         {
-    //           match: 'launchImage',
-    //           replacement: '<%= config.launchImage %>'
-    //         },
-    //         {
-    //           match: 'iframeURL',
-    //           replacement: '<%= config.iframeURL %>'
-    //         },
-    //         {
-    //           match: 'iframeURL',
-    //           replacement: '<%= config.iframeURL %>'
-    //         }
-    //       ]
-    //     },
-    //     files: [
-    //       {expand: true, flatten: true, src: ['src/boot.js'], dest: 'build/'}
-    //     ]
-    //   }
-    // },
 
     s3: {
       test: {
         options: {
             bucket: 'gdn-cdn',
+            region: 'us-east-1',
             access: 'public-read',
             headers: {
               'Cache-Control': 'max-age=60, public',
@@ -75,8 +57,8 @@ module.exports = function(grunt) {
         },
         upload: [
           {
-            src: 'boot.js',
-            dest: '/nextgen/<%= config.S3NextGenPath %>',
+            src: 'build/boot.js',
+            dest: '/next-gen<%= config.S3NextGenPath %>boot.js',
           }
         ]
       },
@@ -90,8 +72,8 @@ module.exports = function(grunt) {
         },
         upload: [
           {
-            src: 'boot.js',
-            dest: '/nextgen/<%= config.S3NextGenPath %>',
+            src: 'src/boot.js',
+            dest: '/next-gen<%= config.S3NextGenPath %>boot.js',
           }
         ]
       }
@@ -118,7 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-s3');
 
   grunt.registerTask('default', ['clean', 'copy','replace', 'connect', 'watch']);
-  grunt.registerTask('deploy', ['connect']);
+  grunt.registerTask('deploy', ['s3:prod']);
   grunt.registerTask('test-deploy', ['s3:test']);
 
 };

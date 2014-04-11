@@ -42,12 +42,13 @@ define([], function () {
     function buildLaunchPad() {
         var launcher = document.createElement('div');
         launcher.style.width = '100%';
-        launcher.style.height = '500px';
+        launcher.style.height = '0';
+        launcher.style.position = 'relative';
+        launcher.style.paddingBottom = '56.25%';
+        launcher.style.cursor = 'pointer';
         launcher.style.backgroundImage = 'url(' + launcherImgSrc  + ')';
         launcher.style.backgroundRepeat = 'no-repeat';
         launcher.style.backgroundSize = 'cover';
-
-        launcher.innerHTML = launcherHTML;
         return launcher;
     }
 
