@@ -67,7 +67,7 @@ module.exports = function(grunt) {
         },
         upload: [
           {
-            src: 'src/boot.js',
+            src: 'build/boot.js',
             dest: '/next-gen<%= config.S3NextGenPath %>boot.js',
           }
         ]
