@@ -25,7 +25,7 @@ running:
 
 All the interactive settings are stores in `src/settings.json` these are:
 
-```javascript
+```json
 {
     "launchImage": "path to image that is clicked to launch the iframe",
     "iframeURL": "URL to the iframed page",
