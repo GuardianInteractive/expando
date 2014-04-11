@@ -1,5 +1,5 @@
 {
     "launchImage": "http://placehold.it/1280x720",
     "iframeURL": "http://bbc.co.uk/news/",
-    "S3NextGenPath": "/testing/"
+    "S3NextGenPath": "/testing"
 }

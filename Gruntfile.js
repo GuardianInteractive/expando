@@ -21,27 +21,21 @@ module.exports = function(grunt) {
 
 
     replace: {
-      dist: {
-        options: {
-          patterns: [
-            {
-              match: 'launchImage',
-              replacement: '<%= config.launchImage %>'
-            },
-            {
-              match: 'iframeURL',
-              replacement: '<%= config.iframeURL %>'
-            },
-            {
-              match: 'iframeURL',
-              replacement: '<%= config.iframeURL %>'
-            }
-          ]
+      example: {
+        src: ['src/r2_code_block.html', 'src/boot.js'],
+        dest: 'build/',
+        replacements: [{
+          from: '@@launchImage',
+          to: '<%= config.launchImage %>'
         },
-        files: [
-          {expand: true, flatten: true, src: ['src/r2_code_block.html'], dest: 'build/'},
-          {expand: true, flatten: true, src: ['src/boot.js'], dest: 'build/'}
-        ]
+        {
+          from: '@@iframeURL',
+          to: '<%= config.iframeURL %>'
+        },
+        {
+          from: '@@S3NextGenPath',
+          to: '<%= config.S3NextGenPath %>'
+        }]
       }
     },
 
@@ -97,7 +91,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-s3');
 
   grunt.registerTask('default', ['clean', 'copy','replace', 'connect', 'watch']);
