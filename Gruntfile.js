@@ -34,7 +34,7 @@ module.exports = function(grunt) {
           ]
         },
         files: [
-          {expand: true, flatten: true, src: ['src/boot.js'], dest: 'build/'}
+          {expand: true, flatten: true, src: ['./src/boot.js'], dest: 'build/'}
         ]
       }
     },
