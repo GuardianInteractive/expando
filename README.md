@@ -21,6 +21,23 @@ running:
 > grunt
 ```
 
+## How to force iframe links to load in parent page
+
+Include [`<base>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base) tag in the `<head>` with a `target` attribute of `_top`. This will force links
+to load in the parent page.
+
+```html
+<!-- HTML page that is being embedded in the iframe -->
+<head>
+    ...
+    <base target="_top" />
+    ...
+</head>
+```
+
+
+
+
 ## Configure the interactive
 
 All the interactive settings are stores in `src/settings.json` these are:
