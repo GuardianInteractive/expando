@@ -42,7 +42,6 @@ module.exports = function(grunt) {
     s3: {
         options: {
             bucket: 'gdn-cdn',
-            region: 'us-east-1',
             access: 'public-read',
             headers: {
               // 5 min cache
@@ -65,7 +64,7 @@ module.exports = function(grunt) {
         upload: [
           {
             src: 'build/boot.js',
-            dest: '/bootn<%= config.S3NextGenPath %>boot.js',
+            dest: '/boot<%= config.S3BootPath %>boot.js',
           }
         ]
       }
@@ -91,8 +90,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-s3');
 
-  grunt.registerTask('default', ['clean', 'copy','replace', 'connect', 'watch']);
-  grunt.registerTask('deploy', ['s3:prod']);
-  grunt.registerTask('test-deploy', ['s3:test']);
+  grunt.registerTask('build', ['clean', 'copy','replace']);
+  grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('deploy', ['build', 's3:prod']);
+  grunt.registerTask('test-deploy', ['build', 's3:test']);
 
 };
