@@ -34,41 +34,38 @@ module.exports = function(grunt) {
         },
         {
           from: '@@S3NextGenPath',
-          to: '<%= config.S3NextGenPath %>'
+          to: '<%= config.S3BootPath %>'
         }]
       }
     },
 
     s3: {
-      test: {
         options: {
             bucket: 'gdn-cdn',
             region: 'us-east-1',
             access: 'public-read',
             headers: {
-              'Cache-Control': 'max-age=60, public',
+              // 5 min cache
+              'Cache-Control': 'max-age=300, public',
             },
+        },
+
+      test: {
+        options: {
             debug: true
         },
         upload: [
           {
             src: 'build/boot.js',
-            dest: '/next-gen<%= config.S3NextGenPath %>boot.js',
+            dest: '/boot<%= config.S3BootPath %>boot.js',
           }
         ]
       },
       prod: {
-        options: {
-            bucket: 'gdn-cdn',
-            access: 'public-read',
-            headers: {
-              'Cache-Control': 'max-age=60, public',
-            }
-        },
         upload: [
           {
             src: 'build/boot.js',
-            dest: '/next-gen<%= config.S3NextGenPath %>boot.js',
+            dest: '/bootn<%= config.S3NextGenPath %>boot.js',
           }
         ]
       }

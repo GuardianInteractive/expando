@@ -1,5 +1,5 @@
 {   
     "launchImage": "http://placehold.it/1280x720",
-    "iframeURL": "http://bth.jam3.net/",
-    "S3NextGenPath": "/technology/ng-interactive/2014/digital-deadly-sins/"
+    "iframeURL": "http://www.example.com/",
+    "S3BootPath": "/year/month/project-name/"
 }
